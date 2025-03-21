@@ -43,3 +43,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Gradle files
+# Allow Gradle wrapper files
+!android/gradle/wrapper/gradle-wrapper.jar
+!android/gradlew
+!android/gradlew.bat
+# Ignore other Gradle files
+android/.gradle/
+android/build/
+android/app/build/
