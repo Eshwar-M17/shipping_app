@@ -1,0 +1,19 @@
+# This file must *not* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+
+# Location of the SDK. This is only used by Gradle.
+# For customization when using a Version Control System, please read the
+# header note.
+
+# Replace these paths with your actual SDK locations
+# Windows example:
+sdk.dir=C:\\Users\\YourUsername\\AppData\\Local\\Android\\Sdk
+flutter.sdk=C:\\dev\\flutter
+
+# macOS/Linux example:
+# sdk.dir=/Users/YourUsername/Library/Android/sdk
+# flutter.sdk=/Users/YourUsername/flutter
+
+flutter.buildMode=debug
+flutter.versionName=1.0.0
+flutter.versionCode=1 
