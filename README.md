@@ -1,4 +1,4 @@
-# Shiplee - Shipping App
+# Shiplee - Shipping App (Internship task)
 
 A modern, feature-rich shipping app built with Flutter that allows users to compare shipping rates from multiple couriers, book shipments, and track orders in real-time.
 
@@ -11,20 +11,19 @@ This project consists of two parts that must be set up in the correct order:
 
 - **Courier Comparison**: Compare shipping rates from multiple courier services
 - **Shipment Booking**: Easy package details entry and address selection
-- **Real-time Tracking**: Track your shipments with live updates
-- **Multiple Couriers**: Integration with major courier services
+
 
 ## Screenshots
 
 <table>
   <tr>
-    <td><img src="assets/screenshots/home_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/package_detail_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/adress_screen.png" width="200"></td>
+    <td><img src="screenshots/home_screen.png" width="200"></td>
+    <td><img src="screenshots/package_detail_screen.png" width="200"></td>
+    <td><img src="screenshots/adress_screen.png" width="200"></td>
   </tr>
   <tr>
-    <td><img src="assets/screenshots/shipping_option_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/payment_screen.png" width="200"></td>
+    <td><img src="screenshots/shipping_option_screen.png" width="200"></td>
+    <td><img src="screenshots/payment_screen.png" width="200"></td>
   </tr>
 </table>
 
