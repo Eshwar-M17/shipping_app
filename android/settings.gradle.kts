@@ -1,9 +1,14 @@
 pluginManagement {
     val flutterSdkPath = run {
         val properties = java.util.Properties()
-        file("local.properties").inputStream().use { properties.load(it) }
+        val localPropertiesFile = File(rootProject.projectDir, "local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.reader().use { reader ->
+                properties.load(reader)
+            }
+        }
         val flutterSdkPath = properties.getProperty("flutter.sdk")
-        require(flutterSdkPath != null) { "flutter.sdk not set in local.properties" }
+            ?: throw GradleException("flutter.sdk not set in local.properties")
         flutterSdkPath
     }
 
