@@ -34,7 +34,10 @@ This is the backend server for the Shiplee shipping app. It provides REST API en
 
 ### Shipping Rates
 
-- `POST /api/shipping/rates` - Calculate shipping rates
+#### Calculate Shipping Rates
+- **Endpoint**: `POST /api/shipping/rates`
+- **Description**: Calculate shipping rates from multiple courier services
+- **Request Body**:
   ```json
   {
     "weight": 2.5,
@@ -47,37 +50,42 @@ This is the backend server for the Shiplee shipping app. It provides REST API en
     "delivery_postal_code": "500100"
   }
   ```
-
-### Orders
-
-- `POST /api/orders` - Create a new order
+- **Response**:
   ```json
   {
-    "package_details": {
-      "weight": 2.5,
-      "length": 30,
-      "width": 20,
-      "height": 15,
-      "category": "Electronics"
-    },
-    "pickup_address": {
-      "name": "John Doe",
-      "street": "123 Main St",
-      "city": "Mumbai",
-      "state": "Maharashtra",
-      "postal_code": "400001",
-      "phone": "9876543210"
-    },
-    "delivery_address": {
-      "name": "Alice Brown",
-      "street": "456 Park Ave",
-      "city": "Delhi",
-      "state": "Delhi",
-      "postal_code": "110001",
-      "phone": "7654321098"
-    },
-    "courier_id": 3,
-    "total_price": 175.00
+    "success": true,
+    "rates": [
+      {
+        "courier_id": 1,
+        "courier_name": "Express Courier",
+        "base_price": 150.00,
+        "distance_charge": 25.00,
+        "weight_charge": 37.50,
+        "total_price": 212.50,
+        "estimated_days": "2-3",
+        "service_type": "Express"
+      },
+      {
+        "courier_id": 2,
+        "courier_name": "Standard Post",
+        "base_price": 100.00,
+        "distance_charge": 20.00,
+        "weight_charge": 25.00,
+        "total_price": 145.00,
+        "estimated_days": "4-5",
+        "service_type": "Standard"
+      }
+    ]
+  }
+  ```
+- **Error Response**:
+  ```json
+  {
+    "success": false,
+    "error": {
+      "code": "INVALID_WEIGHT",
+      "message": "Package weight must be between 0.1 and 50 kg"
+    }
   }
   ```
 
