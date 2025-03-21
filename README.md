@@ -12,6 +12,18 @@ This project consists of two parts that must be set up in the correct order:
 - **Courier Comparison**: Compare shipping rates from multiple courier services
 - **Shipment Booking**: Easy package details entry and address selection
 
+## 🎥 Demo Video
+
+<div align="center">
+  <a href="screenshots/demo_vid.mp4">
+    <img src="screenshots/thumbnail.png" alt="Demo Video" width="600">
+  </a>
+  <p><em>👆 Click to watch the demo video</em></p>
+</div>
+
+### Key Features Demonstrated
+- 📱 app walkthrough
+
 
 ## Screenshots
 
