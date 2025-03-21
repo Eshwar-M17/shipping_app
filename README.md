@@ -1,6 +1,6 @@
 # Shiplee - Shipping App (Internship task)
 
-A modern, feature-rich shipping app built with Flutter that allows users to compare shipping rates from multiple couriers, book shipments, and track orders in real-time.
+A modern, feature-rich shipping app built with Flutter that allows users to compare shipping rates from multiple couriers  and book shipments.
 
 ## ⚠️ Important: Setup Order
 This project consists of two parts that must be set up in the correct order:
