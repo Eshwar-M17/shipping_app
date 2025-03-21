@@ -6,7 +6,8 @@ const { getDbConnection } = require('../config/db-sqlite');
 const dbPath = path.join(__dirname, '..', 'database', 'shipping_app.db');
 
 // Setup function
-function setupDatabase() {
+async function setupDatabase() {
+  let db;
   try {
     // Create database directory if it doesn't exist
     const dbDir = path.dirname(dbPath);
@@ -21,14 +22,14 @@ function setupDatabase() {
     }
     
     // Get database connection
-    const db = getDbConnection();
+    db = await getDbConnection();
     console.log('SQLite database created successfully.');
     
     // Create tables
     console.log('Creating tables...');
     
     // Couriers table
-    db.exec(`
+    await db.runAsync(`
       CREATE TABLE couriers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -41,7 +42,7 @@ function setupDatabase() {
     `);
     
     // Shipping zones table
-    db.exec(`
+    await db.runAsync(`
       CREATE TABLE shipping_zones (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         from_postal_code TEXT NOT NULL,
@@ -51,7 +52,7 @@ function setupDatabase() {
     `);
     
     // Zone multipliers table
-    db.exec(`
+    await db.runAsync(`
       CREATE TABLE zone_multipliers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         zone_type TEXT NOT NULL,
@@ -62,7 +63,7 @@ function setupDatabase() {
     `);
     
     // Users table
-    db.exec(`
+    await db.runAsync(`
       CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -73,7 +74,7 @@ function setupDatabase() {
     `);
     
     // Orders table
-    db.exec(`
+    await db.runAsync(`
       CREATE TABLE orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id INTEGER,
@@ -95,7 +96,7 @@ function setupDatabase() {
     console.log('Inserting sample data...');
     
     // Insert couriers
-    db.exec(`
+    await db.runAsync(`
       INSERT INTO couriers (name, logo_url, base_price, price_per_kg, estimated_delivery, rating) VALUES
       ('Delhivery', 'assets/logos/delhivery.png', 80.00, 20.00, '2-3 Days', 4.5),
       ('DTDC', 'assets/logos/dtdc.png', 75.00, 25.00, '3-4 Days', 4.2),
@@ -105,7 +106,7 @@ function setupDatabase() {
     `);
     
     // Insert shipping zones
-    db.exec(`
+    await db.runAsync(`
       INSERT INTO shipping_zones (from_postal_code, to_postal_code, zone_type) VALUES
       ('400001', '400100', 'local'),
       ('400001', '500100', 'regional'),
@@ -119,7 +120,7 @@ function setupDatabase() {
     `);
     
     // Insert zone multipliers
-    db.exec(`
+    await db.runAsync(`
       INSERT INTO zone_multipliers (zone_type, courier_id, price_multiplier) VALUES
       -- Delhivery
       ('local', 1, 1.0),
@@ -144,14 +145,14 @@ function setupDatabase() {
     `);
     
     // Insert sample users
-    db.exec(`
+    await db.runAsync(`
       INSERT INTO users (name, email, phone) VALUES
       ('John Doe', 'john@example.com', '9876543210'),
       ('Jane Smith', 'jane@example.com', '8765432109')
     `);
     
     // Insert sample orders
-    db.exec(`
+    await db.runAsync(`
       INSERT INTO orders (user_id, package_details, pickup_address, delivery_address, courier_id, total_price, status) VALUES
       (1, 
        '{"weight": 2.5, "length": 30, "width": 20, "height": 15, "category": "Electronics"}',
@@ -167,15 +168,18 @@ function setupDatabase() {
     
     console.log('Sample data inserted successfully.');
     
-    // Close database connection
-    db.close();
-    
-    console.log('Database setup completed!');
-    console.log('You can now start the server by running: npm run dev');
   } catch (error) {
     console.error('Error setting up database:', error);
+    process.exit(1);
+  } finally {
+    if (db) {
+      await db.closeAsync();
+    }
   }
 }
 
 // Run setup
-setupDatabase(); 
+setupDatabase().catch(err => {
+  console.error('Setup failed:', err);
+  process.exit(1);
+}); 

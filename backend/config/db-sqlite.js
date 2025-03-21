@@ -34,6 +34,24 @@ const getDbConnection = () => {
         });
       };
       
+      db.runAsync = (sql, params) => {
+        return new Promise((resolve, reject) => {
+          db.run(sql, params, function(err) {
+            if (err) reject(err);
+            else resolve(this);
+          });
+        });
+      };
+
+      db.execAsync = (sql) => {
+        return new Promise((resolve, reject) => {
+          db.exec(sql, (err) => {
+            if (err) reject(err);
+            else resolve();
+          });
+        });
+      };
+      
       db.closeAsync = () => {
         return new Promise((resolve, reject) => {
           db.close((err) => {
