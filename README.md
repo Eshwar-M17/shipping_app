@@ -2,23 +2,29 @@
 
 A modern, feature-rich shipping app built with Flutter that allows users to compare shipping rates from multiple couriers, book shipments, and track orders in real-time.
 
+## ⚠️ Important: Setup Order
+This project consists of two parts that must be set up in the correct order:
+1. **Backend Server** (Must be set up and running first)
+2. **Flutter App** (Set up after backend is running)
+
 ## Features
 
 - **Courier Comparison**: Compare shipping rates from multiple courier services
 - **Shipment Booking**: Easy package details entry and address selection
-
+- **Real-time Tracking**: Track your shipments with live updates
+- **Multiple Couriers**: Integration with major courier services
 
 ## Screenshots
 
 <table>
   <tr>
-    <td><img src="screenshots/home_screen.png" width="200"></td>
-    <td><img src="screenshots/package_detail_screen.png" width="200"></td>
-    <td><img src="screenshots/adress_screen.png" width="200"></td>
+    <td><img src="assets/screenshots/home_screen.png" width="200"></td>
+    <td><img src="assets/screenshots/package_detail_screen.png" width="200"></td>
+    <td><img src="assets/screenshots/adress_screen.png" width="200"></td>
   </tr>
   <tr>
-    <td><img src="screenshots/shipping_option_screen.png" width="200"></td>
-    <td><img src="screenshots/payment_screen.png" width="200"></td>
+    <td><img src="assets/screenshots/shipping_option_screen.png" width="200"></td>
+    <td><img src="assets/screenshots/payment_screen.png" width="200"></td>
   </tr>
 </table>
 
@@ -26,8 +32,116 @@ A modern, feature-rich shipping app built with Flutter that allows users to comp
 
 - **Frontend**: Flutter, Dart
 - **State Management**: Riverpod
-- **Backend**: Node.js (see [backend folder](./backend))
-- **Database**: MySQL/SQLite
+- **Backend**: Node.js with Express
+- **Database**: SQLite
+
+## Prerequisites
+
+1. Install Flutter:
+   - Download Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install)
+   - Add Flutter to your PATH
+   - Run `flutter doctor` and fix any issues
+
+2. Install Node.js:
+   - Download from [nodejs.org](https://nodejs.org/) (v14 or higher)
+   - Verify installation: `node --version` and `npm --version`
+
+3. Install Android Studio:
+   - Download from [developer.android.com](https://developer.android.com/studio)
+   - Install Flutter and Dart plugins
+   - Set up an Android emulator
+
+## Step 1: Backend Setup (Do This First!)
+
+1. Navigate to backend directory:
+   ```bash
+   cd shipping_app/backend
+   ```
+
+2. Install backend dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment:
+   ```bash
+   # Create .env file
+   echo "PORT=5000" > .env
+   ```
+
+4. Initialize database:
+   ```bash
+   npm run setup-sqlite
+   ```
+
+5. Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+6. Verify backend is running:
+   - Open browser to `http://localhost:5000`
+   - You should see "Server is running"
+   - Keep this terminal window open
+
+## Step 2: Flutter App Setup
+
+Open a new terminal window and:
+
+1. Return to project root:
+   ```bash
+   cd shipping_app
+   ```
+
+2. Set up Android SDK configuration:
+   - Copy the template file:
+     ```bash
+     cp android/local.properties.template android/local.properties
+     ```
+   - Edit `android/local.properties` with your SDK paths:
+     ```properties
+     # Windows paths (use double backslashes)
+     sdk.dir=C:\\Users\\YourUsername\\AppData\\Local\\Android\\Sdk
+     flutter.sdk=C:\\dev\\flutter
+
+     # macOS/Linux paths
+     # sdk.dir=/Users/YourUsername/Library/Android/sdk
+     # flutter.sdk=/Users/YourUsername/flutter
+     ```
+
+3. Get Flutter dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+4. Run the app:
+   ```bash
+   flutter run
+   ```
+
+## Common Issues and Solutions
+
+1. **"Cannot connect to backend" Error**:
+   - Ensure you started the backend server FIRST
+   - Backend must be running before starting the Flutter app
+   - Check if backend is running on `http://localhost:5000`
+
+2. **Database Errors**:
+   ```bash
+   cd backend
+   rm -rf database/shipping_app.db
+   npm run setup-sqlite
+   ```
+
+3. **Android SDK Not Found**: 
+   - Verify paths in `android/local.properties`
+   - Ensure Android Studio is properly installed
+
+4. **API Connection Issues**: 
+   The app uses different URLs based on platform:
+   - Android Emulator: `http://10.0.2.2:5000`
+   - iOS Simulator: `http://localhost:5000`
+   - Web: `http://localhost:5000`
 
 ## Project Structure
 
@@ -43,53 +157,6 @@ lib/
     ├── home/                 # Home screen widgets
     └── ...                   # Other widgets
 ```
-
-## Getting Started
-
-### Prerequisites
-
-- Flutter (latest stable version)
-- Dart SDK
-- Android Studio / Xcode for emulators
-
-### Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/Eshwar-M17/shipping_app
-   ```
-
-2. Navigate to the project directory:
-   ```
-   cd shipping_app
-   ```
-
-3. Set up Android SDK configuration:
-   - Copy `android/local.properties.template` to `android/local.properties`
-   - Update the paths in `local.properties` to match your system:
-     ```properties
-     # Windows example:
-     sdk.dir=C:\\Users\\YourUsername\\AppData\\Local\\Android\\Sdk
-     flutter.sdk=C:\\dev\\flutter
-
-     # macOS/Linux example:
-     # sdk.dir=/Users/YourUsername/Library/Android/sdk
-     # flutter.sdk=/Users/YourUsername/flutter
-     ```
-
-4. Install dependencies:
-   ```
-   flutter pub get
-   ```
-
-5. Run the app:
-   ```
-   flutter run
-   ```
-
-### Backend Setup
-
-For setting up the backend server, please refer to the [backend README](./backend/README.md).
 
 ## State Management
 
@@ -108,4 +175,24 @@ The app follows Material Design guidelines with custom components for a modern l
 - Step-by-step shipment booking process
 - Interactive tracking view
 - Courier comparison cards
+
+## Development
+
+For detailed backend API documentation and development guidelines, see [backend/README.md](./backend/README.md).
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/YourFeature`
+3. Commit your changes: `git commit -m 'Add YourFeature'`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Submit a pull request
+
+## Support
+
+If you encounter any issues:
+1. Check the Common Issues section above
+2. Open an issue in the repository
+3. Provide detailed error messages and steps to reproduce
+
 
