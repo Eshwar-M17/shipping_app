@@ -12,13 +12,13 @@ A modern, feature-rich shipping app built with Flutter that allows users to comp
 
 <table>
   <tr>
-    <td><img src="assets/screenshots/home_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/package_detail_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/adress_screen.png" width="200"></td>
+    <td><img src="screenshots/home_screen.png" width="200"></td>
+    <td><img src="screenshots/package_detail_screen.png" width="200"></td>
+    <td><img src="screenshots/adress_screen.png" width="200"></td>
   </tr>
   <tr>
-    <td><img src="assets/screenshots/shipping_option_screen.png" width="200"></td>
-    <td><img src="assets/screenshots/payment_screen.png" width="200"></td>
+    <td><img src="screenshots/shipping_option_screen.png" width="200"></td>
+    <td><img src="screenshots/payment_screen.png" width="200"></td>
   </tr>
 </table>
 
@@ -56,12 +56,12 @@ lib/
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/shiplee.git
+   git clone https://github.com/Eshwar-M17/shipping_app
    ```
 
 2. Navigate to the project directory:
    ```
-   cd shiplee
+   cd shipping_app
    ```
 
 3. Set up Android SDK configuration:
